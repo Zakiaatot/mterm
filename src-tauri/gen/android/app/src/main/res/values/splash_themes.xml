@@ -7,10 +7,9 @@
     <item name="windowSplashScreenAnimationDuration">300</item>
     <item name="postSplashScreenTheme">@style/Theme.mterm</item>
 
-    <item name="android:statusBarColor" >@color/white</item>
+    <!-- Status bar and Nav bar configs -->
+    <item name="android:statusBarColor">@color/white</item>
     <item name="android:navigationBarColor">@color/white</item>
     <item name="android:windowLightStatusBar">true</item>
-
-    <item name="android:windowSplashScreenBrandingImage"></item>
   </style>
 </resources>
