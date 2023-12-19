@@ -1829,6 +1829,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "libmterm_rs"
+version = "0.1.0"
+dependencies = [
+ "dunce",
+]
+
+[[package]]
 name = "libredox"
 version = "0.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1990,6 +1997,7 @@ dependencies = [
 name = "mterm"
 version = "0.0.0"
 dependencies = [
+ "libmterm_rs",
  "serde_json",
  "tauri",
  "tauri-build",
