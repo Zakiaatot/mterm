@@ -10,14 +10,17 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "vue": "^3.3.4",
     "@tauri-apps/api": "^2.0.0-alpha.12",
-    "@tauri-apps/plugin-shell": "^2.0.0-alpha.3"
+    "@tauri-apps/plugin-shell": "^2.0.0-alpha.3",
+    "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.2.3",
-    "vite": "^4.4.4",
     "@tauri-apps/cli": "^2.0.0-alpha.18",
-    "internal-ip": "^7.0.0"
+    "@vitejs/plugin-vue": "^4.2.3",
+    "autoprefixer": "^10.4.16",
+    "internal-ip": "^7.0.0",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.3.7",
+    "vite": "^4.4.4"
   }
 }

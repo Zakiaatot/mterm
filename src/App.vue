@@ -1,10 +1,8 @@
-<script setup>
+<script>
 </script>
 
 <template>
-  <div class="wrap">
-    <div class="title">Mterm</div>
-  </div>
+  <div class=" w-screen h-screen bg-black"></div>
 </template>
 
 <style>
@@ -16,20 +14,5 @@ body,
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
-}
-
-
-
-.wrap {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-}
-
-.title {
-  font-size: 30px;
-  font-weight: bold;
 }
 </style>
