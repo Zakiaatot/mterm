@@ -5,6 +5,9 @@ plugins {
 }
 
 android {
+  tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    exclude("**/generated/**")
+  }
   compileSdk = 33
   namespace = "com.mterm.mterm"
   defaultConfig {
