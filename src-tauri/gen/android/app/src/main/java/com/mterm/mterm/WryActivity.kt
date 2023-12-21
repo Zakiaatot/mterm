@@ -34,6 +34,19 @@ abstract class WryActivity : AppCompatActivity() {
     fun setBlackBar() {
       runOnUiThread { setStatusBarTextColor(false) }
     }
+    
+    @SuppressLint("InternalInsetResource", "DiscouragedApi")
+    @JavascriptInterface
+    fun getStatusBarHeight(): Int {
+      var height = 0
+      val resourceId =
+        applicationContext.resources.getIdentifier("status_bar_height", "dimen", "android")
+      if (resourceId > 0) {
+        height = applicationContext.resources.getDimensionPixelSize(resourceId)
+      }
+       val dm = applicationContext.resources.displayMetrics;
+        return  (height/dm.density).toInt();
+    }
   }
 
   fun setStatusBarTextColor(light: Boolean) {

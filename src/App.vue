@@ -1,21 +1,25 @@
+<template>
+  <div class="w-screen h-screen bg-black">
+    <navbar></navbar>
+  </div>
+</template>
+
 <script>
+import navbar from './components/navbar/navbar.vue'
 export default {
+  components: {
+    navbar
+  },
   mounted() {
+    const element = document.getElementById('app');
+    element.style.setProperty('--status-bar-height', AndroidApi.getStatusBarHeight())
+    AndroidApi.setWhiteBar()
     setTimeout(() => {
-      AndroidApi.setWhiteBar()
       AndroidApi.closeSplash()
     }, 500)
   }
 }
 </script>
-
-<template>
-  <div class="w-screen h-screen bg-black">
-    <div class="w-full h-full flex justify-center items-center">
-      <div class="text-white text-3xl font-bold">Mterm</div>
-    </div>
-  </div>
-</template>
 
 <style>
 *,
@@ -26,5 +30,6 @@ body,
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  --status-bar-height: 24px;
 }
 </style>
