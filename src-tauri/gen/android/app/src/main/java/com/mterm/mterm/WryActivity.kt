@@ -61,6 +61,7 @@ abstract class WryActivity : AppCompatActivity() {
 
   private fun setWebView(webView: RustWebView) {
     mWebView = webView
+    mWebView.overScrollMode=WebView.OVER_SCROLL_NEVER
     mWebView.addJavascriptInterface(JsObject(), "AndroidApi");
   }
 

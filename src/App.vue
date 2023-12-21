@@ -1,6 +1,16 @@
 <template>
-  <div class="w-screen h-screen bg-black">
-    <navbar></navbar>
+  <div class="status-bar">
+    <navbar />
+    <div class="h-12"></div>
+    <p class=" text-9xl max-w-full">Mterm</p>
+    <p class=" text-9xl max-w-full">Mterm</p>
+    <p class=" text-9xl max-w-full">Mterm</p>
+    <p class=" text-9xl max-w-full">Mterm</p>
+    <p class=" text-9xl max-w-full">Mterm</p>
+    <p class=" text-9xl max-w-full">Mterm</p>
+    <p class=" text-9xl max-w-full">Mterm</p>
+    <p class=" text-9xl max-w-full">Mterm</p>
+
   </div>
 </template>
 
@@ -13,7 +23,6 @@ export default {
   mounted() {
     const element = document.getElementById('app');
     element.style.setProperty('--status-bar-height', AndroidApi.getStatusBarHeight())
-    AndroidApi.setWhiteBar()
     setTimeout(() => {
       AndroidApi.closeSplash()
     }, 500)
@@ -31,5 +40,9 @@ body,
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   --status-bar-height: 24px;
+}
+
+.status-bar {
+  padding-top: var(--status-bar-height);
 }
 </style>

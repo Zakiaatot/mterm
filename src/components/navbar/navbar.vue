@@ -1,72 +1,76 @@
 <template>
-    <view class="wrap fall-down">
-        <view :class="{ 'shadow-md': this.navbarBorder }"
-            class="navbar status-bar-blank w-full min-h-0 h-[48px] py-[4px] px-0 text-base-content">
-            <view class="navbar-start h-full ml-[18px]">
-                <view class="h-full inline-flex items-center">
-                    <img class="drawer-btn h-[28px] w-[28px] rounded-full min-h-0 min-w-0 p-0 hover:shadow-sm"
-                        src="data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M170.667 469.333h682.666a42.667 42.667 0 0 1 0 85.334H170.667a42.667 42.667 0 0 1 0-85.334zm0-298.666H768A42.667 42.667 0 0 1 768 256H170.667a42.667 42.667 0 1 1 0-85.333zm0 597.333h512a42.667 42.667 0 0 1 0 85.333h-512a42.667 42.667 0 0 1 0-85.333z' fill='%23000'/%3E%3C/svg%3E"
-                        alt="more" @click="showDrawer()" />
-                </view>
-            </view>
-            <view class="navbar-center h-full flex justify-center items-center">
-                <image class="rotate w-[28px] h-[28px] rounded-full mx-[4px] shadow-md" src="../../static/logo.png"
-                    alt="logo">
-                </image>
-                <view class="font-black text-[20px] pr-[4px]">Mterm</view>
-            </view>
-            <view class="navbar-end h-full mr-[18px] flex">
-
-            </view>
-        </view>
-    </view>
+    <div ref='navbarWrap' class="status-bar fall-down bg-base-100 fixed top-0 w-full z-50 backdrop-blur bg-opacity-70">
+        <div class="navbar w-full">
+            <div class="navbar-start">
+                <button class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                    </svg>
+                </button>
+            </div>
+            <div class="navbar-center">
+                <svg t="1703166925072" class="rotate w-6 h-6 fill-black dark:fill-white" viewBox="0 0 1024 1024"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2311" width="200" height="200">
+                    <path
+                        d="M480 512v-0.112-0.112a47.84 47.84 0 0 0-14.688-34.544l0.016-0.016-288-288-0.128 0.128a48 48 0 1 0-64.464 71.056l251.488 251.488L109.44 766.672l0.016 0.016a48 48 0 0 0 67.856 67.856l0.016 0.016 288-288-0.016-0.016A47.84 47.84 0 0 0 480 512z m408 240h-368a40 40 0 0 0-40 40v16a40 40 0 0 0 40 40h368a40 40 0 0 0 40-40v-16a40 40 0 0 0-40-40z"
+                        p-id="2312"></path>
+                </svg>
+                <a class=" text-xl font-extrabold px-1">Mterm</a>
+            </div>
+            <div class="navbar-end">
+                <label class="swap swap-rotate mr-3">
+                    <input type="checkbox" @change='darkTrigger' :checked="getTheme() == 'dark'" />
+                    <!-- sun icon -->
+                    <svg class="swap-off  w-6 h-6 fill-orange-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+                    </svg>
+                    <!-- moon icon -->
+                    <svg class="swap-on  w-6 h-6 fill-orange-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+                    </svg>
+                </label>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
+import { darkTrigger, getTheme, setTheme } from '../../utils/theme'
 export default {
     data() {
         return {
-            navbarBorder: false
+
         }
     },
     methods: {
-        changeNavbarBorder(open) {
-            if (open === null)
-                this.navbarBorder = !this.navbarBorder
-            else
-                this.navbarBorder = open
+        handleScroll() {
+            let scrolled = window.scrollY || document.documentElement.scrollTop
+            if (scrolled > 0) {
+                this.$refs.navbarWrap.classList.add('shadow-md')
+            } else {
+                this.$refs.navbarWrap.classList.remove('shadow-md')
+            }
         },
         // 打开窗口
         showDrawer() {
-            // uni.vibrateShort()
-            // uni.$emit("changeDrawer", true)
         },
+        darkTrigger,
+        getTheme
     },
     mounted() {
-        // uni.$on("changeNavbarBorder", this.changeNavbarBorder)
+        setTheme(getTheme())
+        window.addEventListener('scroll', this.handleScroll)
     },
-    beforeDestroy() {
-        // uni.$on("changeNavbarBorder", this.changeNavbarBorder)
+    beforeUnmount() {
+        window.removeEventListener('scroll', this.handleScroll)
     }
 }
 </script>
 
 <style scoped>
-.wrap {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 999;
-    backdrop-filter: blur(.2rem);
-}
-
-.status-bar-blank {
-    padding-top: var(--status-bar-height);
-    background: rgba(255, 255, 255, 0.7);
-    box-sizing: content-box;
-}
-
-
 @keyframes rotate-ani {
     from {
         transform: rotate(1turn);
