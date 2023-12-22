@@ -1,5 +1,5 @@
 <template>
-    <div ref='navbarWrap' class="status-bar fall-down bg-base-100 fixed top-0 w-full z-50 backdrop-blur bg-opacity-70">
+    <div ref='navbarWrap' class="status-bar fall-down bg-base-100 fixed top-0 w-screen z-50 backdrop-blur bg-opacity-70">
         <div class="navbar w-full">
             <div class="navbar-start">
                 <button class="btn btn-ghost btn-circle">
@@ -42,12 +42,13 @@ import { darkTrigger, getTheme, setTheme } from '../../utils/theme'
 export default {
     data() {
         return {
-
+            mainContainer: null
         }
     },
     methods: {
         handleScroll() {
-            let scrolled = window.scrollY || document.documentElement.scrollTop
+            const element = this.mainContainer
+            let scrolled = element.scrollY || element.scrollTop
             if (scrolled > 0) {
                 this.$refs.navbarWrap.classList.add('shadow-md')
             } else {
@@ -62,10 +63,11 @@ export default {
     },
     mounted() {
         setTheme(getTheme())
-        window.addEventListener('scroll', this.handleScroll)
+        this.mainContainer = document.getElementById('main-container')
+        this.mainContainer.addEventListener('scroll', this.handleScroll)
     },
     beforeUnmount() {
-        window.removeEventListener('scroll', this.handleScroll)
+        this.mainContainer.removeEventListener('scroll', this.handleScroll)
     }
 }
 </script>

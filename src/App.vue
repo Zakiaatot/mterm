@@ -1,16 +1,18 @@
 <template>
-  <div class="status-bar">
+  <div>
     <navbar />
-    <div class="h-12"></div>
-    <p class=" text-9xl max-w-full">Mterm</p>
-    <p class=" text-9xl max-w-full">Mterm</p>
-    <p class=" text-9xl max-w-full">Mterm</p>
-    <p class=" text-9xl max-w-full">Mterm</p>
-    <p class=" text-9xl max-w-full">Mterm</p>
-    <p class=" text-9xl max-w-full">Mterm</p>
-    <p class=" text-9xl max-w-full">Mterm</p>
-    <p class=" text-9xl max-w-full">Mterm</p>
-
+    <div id="main-container" class="status-bar w-screen h-screen overflow-x-hidden">
+      <div class="pt-12 select-none">
+        <p class=" text-9xl max-w-full">Mterm</p>
+        <p class=" text-9xl max-w-full">Mterm</p>
+        <p class=" text-9xl max-w-full">Mterm</p>
+        <p class=" text-9xl max-w-full">Mterm</p>
+        <p class=" text-9xl max-w-full">Mterm</p>
+        <p class=" text-9xl max-w-full">Mterm</p>
+        <p class=" text-9xl max-w-full">Mterm</p>
+        <p class=" text-9xl max-w-full">Mterm</p>
+      </div>
+    </div>
   </div>
 </template>
 
