@@ -1,19 +1,21 @@
 <template>
   <div>
     <navbar />
-    <div id="main-container" class="status-bar w-screen h-screen overflow-x-hidden px-3">
-      <div class="pt-16">
-        <p class=" text-xl max-w-full" v-for="i in 100" :id="i">Mterm</p>
+    <div id="main-container" class="status-bar w-screen h-screen overflow-x-hidden px-2">
+      <div class="w-full h-full pt-16">
+        <term_view />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import term_view from './components/term_view/term_view.vue'
 import navbar from './components/navbar/navbar.vue'
 export default {
   components: {
-    navbar
+    navbar,
+    term_view
   },
   mounted() {
     const element = document.getElementById('app');
