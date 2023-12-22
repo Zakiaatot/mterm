@@ -1,16 +1,9 @@
 <template>
   <div>
     <navbar />
-    <div id="main-container" class="status-bar w-screen h-screen overflow-x-hidden">
-      <div class="pt-12 select-none">
-        <p class=" text-9xl max-w-full">Mterm</p>
-        <p class=" text-9xl max-w-full">Mterm</p>
-        <p class=" text-9xl max-w-full">Mterm</p>
-        <p class=" text-9xl max-w-full">Mterm</p>
-        <p class=" text-9xl max-w-full">Mterm</p>
-        <p class=" text-9xl max-w-full">Mterm</p>
-        <p class=" text-9xl max-w-full">Mterm</p>
-        <p class=" text-9xl max-w-full">Mterm</p>
+    <div id="main-container" class="status-bar w-screen h-screen overflow-x-hidden px-3">
+      <div class="pt-16">
+        <p class=" text-xl max-w-full" v-for="i in 100" :id="i">Mterm</p>
       </div>
     </div>
   </div>
@@ -45,6 +38,6 @@ body,
 }
 
 .status-bar {
-  padding-top: var(--status-bar-height);
+  padding-top: var(--status-bar-height) !important;
 }
 </style>
