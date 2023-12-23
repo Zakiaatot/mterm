@@ -22,7 +22,7 @@
                                 p-id="2312"></path>
                         </svg>
                     </button>
-                    <a class=" text-xl font-extrabold">Mterm</a>
+                    <a class=" select-none text-xl font-extrabold">Mterm</a>
                 </div>
             </div>
         </div>

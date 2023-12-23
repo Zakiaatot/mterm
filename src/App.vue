@@ -2,7 +2,7 @@
   <div>
     <navbar />
     <div id="main-container" class="status-bar w-screen h-screen overflow-x-hidden px-2">
-      <div class="w-full h-full pt-16">
+      <div class="w-full h-full pt-12">
         <term_view />
       </div>
     </div>
@@ -18,8 +18,7 @@ export default {
     term_view
   },
   mounted() {
-    const element = document.getElementById('app');
-    element.style.setProperty('--status-bar-height', AndroidApi.getStatusBarHeight())
+    document.documentElement.style.setProperty('--status-bar-height', AndroidApi.getStatusBarHeight() + 'px')
     setTimeout(() => {
       AndroidApi.closeSplash()
     }, 500)
@@ -28,6 +27,10 @@ export default {
 </script>
 
 <style>
+:root {
+  --status-bar-height: 24px;
+}
+
 *,
 html,
 body,
@@ -36,7 +39,6 @@ body,
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
-  --status-bar-height: 24px;
 }
 
 .status-bar {

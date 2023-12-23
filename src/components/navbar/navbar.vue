@@ -1,6 +1,6 @@
 <template>
     <div ref='navbarWrap' class="status-bar fall-down bg-base-100 fixed top-0 w-screen z-50 backdrop-blur bg-opacity-70">
-        <div class="navbar w-full">
+        <div class="navbar min-h-12 h-12 w-full">
             <div class="navbar-start">
                 <drawer />
             </div>
@@ -13,7 +13,7 @@
                             p-id="2312"></path>
                     </svg>
                 </button>
-                <a class=" text-xl font-extrabold">Mterm</a>
+                <a class=" select-none text-xl font-extrabold">Mterm</a>
             </div>
             <div class="navbar-end">
                 <label class="swap swap-rotate mr-3">
