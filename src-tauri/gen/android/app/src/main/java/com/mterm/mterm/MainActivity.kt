@@ -11,14 +11,14 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 class MainActivity : TauriActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     setTransparentNavigationBar()
-    transparentStatusBar()
+    setTransparentStatusBar()
     super.onCreate(savedInstanceState)
     setStatusBarTextColor(false)
     val splashScreen = installSplashScreen()
     splashScreen.setKeepVisibleCondition { keep }
   }
 
-  private fun transparentStatusBar() {
+  private fun setTransparentStatusBar() {
     window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
     var systemUiVisibility = window.decorView.systemUiVisibility

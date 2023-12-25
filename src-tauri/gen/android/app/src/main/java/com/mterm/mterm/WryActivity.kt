@@ -7,10 +7,12 @@
 package com.mterm.mterm
 
 import android.annotation.SuppressLint
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import android.view.ViewTreeObserver
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +36,7 @@ abstract class WryActivity : AppCompatActivity() {
     fun setBlackBar() {
       runOnUiThread { setStatusBarTextColor(false) }
     }
-    
+
     @SuppressLint("InternalInsetResource", "DiscouragedApi")
     @JavascriptInterface
     fun getStatusBarHeight(): Int {
@@ -44,8 +46,8 @@ abstract class WryActivity : AppCompatActivity() {
       if (resourceId > 0) {
         height = applicationContext.resources.getDimensionPixelSize(resourceId)
       }
-       val dm = applicationContext.resources.displayMetrics;
-        return  (height/dm.density).toInt();
+      val dm = applicationContext.resources.displayMetrics;
+      return (height / dm.density).toInt();
     }
   }
 
@@ -61,8 +63,39 @@ abstract class WryActivity : AppCompatActivity() {
 
   private fun setWebView(webView: RustWebView) {
     mWebView = webView
-    mWebView.overScrollMode=WebView.OVER_SCROLL_NEVER
-    mWebView.addJavascriptInterface(JsObject(), "AndroidApi");
+    mWebView.overScrollMode = WebView.OVER_SCROLL_NEVER
+    mWebView.addJavascriptInterface(JsObject(), "AndroidApi")
+    val rootView = window.decorView.rootView
+
+    // 设置软键盘监听器
+    rootView.viewTreeObserver.addOnGlobalLayoutListener(object :
+      ViewTreeObserver.OnGlobalLayoutListener {
+      private val rect = Rect()
+      private var previousKeyboardHeight = 0
+
+      override fun onGlobalLayout() {
+        rootView.getWindowVisibleDisplayFrame(rect)
+        val screenHeight = rootView.rootView.height
+        val keyboardHeight = screenHeight - rect.bottom
+
+        if (keyboardHeight != previousKeyboardHeight) {
+          // 键盘高度发生变化时通知 WebView
+          notifyWebViewKeyboardHeight(keyboardHeight)
+          previousKeyboardHeight = keyboardHeight
+        }
+      }
+    })
+
+    // 将 WebView 添加到布局中
+    setContentView(mWebView)
+  }
+
+  
+  private fun notifyWebViewKeyboardHeight(keyboardHeight: Int) {
+    val density = resources.displayMetrics.density
+    val keyboardHeightPx = (keyboardHeight / density).toInt()
+    val js = "javascript:notifyKeyboardHeight($keyboardHeightPx)"
+    mWebView.evaluateJavascript(js, null)
   }
 
   val version: String

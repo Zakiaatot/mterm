@@ -2,10 +2,11 @@
   <div>
     <navbar />
     <div id="main-container" class="status-bar w-screen h-screen overflow-x-hidden px-2">
-      <div class="w-full h-full pt-12">
+      <div class="keyboard-padding-bottom w-full h-full pt-12">
         <term_view />
       </div>
     </div>
+    <!-- <div class="w-12 h-12 bg-black fixed bottom-0"></div> -->
   </div>
 </template>
 
@@ -29,6 +30,7 @@ export default {
 <style>
 :root {
   --status-bar-height: 24px;
+  --keyboard-padding-bottom: 0px;
 }
 
 *,
@@ -43,5 +45,9 @@ body,
 
 .status-bar {
   padding-top: var(--status-bar-height) !important;
+}
+
+.keyboard-padding-bottom {
+  padding-bottom: var(--keyboard-padding-bottom) !important;
 }
 </style>
