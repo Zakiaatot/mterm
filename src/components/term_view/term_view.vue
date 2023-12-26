@@ -12,6 +12,12 @@ import { keyboardHeight } from "../../utils/keyboard.js"
 import { watch } from 'vue'
 import "xterm/css/xterm.css"
 export default {
+    props: {
+        term: {
+            required: true,
+            default: null
+        }
+    },
     data() {
         return {
             mterm: {
@@ -66,7 +72,6 @@ export default {
                     // selectionInactiveBackground: "white"
                 }
             }
-            console.log(res)
             this.mterm.viewInstance.options.theme = res
         },
         // term
@@ -84,16 +89,16 @@ export default {
             this.mterm.viewInstance.open(this.$refs.termRootElem)
             this.mterm.viewInstance.loadAddon(new WebglAddon())
             this.mterm.fit.fit()
-            this.mterm.viewInstance.onData((data) => { this.mterm.viewInstance.write(data) })
-            for (let i = 0; i < 100; i++) {
-                this.mterm.viewInstance.write(i + "\r\n")
-            }
+            this.mterm.viewInstance.onData(async (data) => { console.log(await this.term.writeMterm(data)) })
         },
         closeTerm() {
             this.mterm.viewInstance.dispose()
         },
         resizeTerm() {
             this.mterm.fit.fit()
+            const rows = this.mterm.viewInstance.rows
+            const cols = this.mterm.viewInstance.cols
+            this.term.setWindowSizeMterm(rows, cols)
         }
     },
     mounted() {
@@ -104,6 +109,9 @@ export default {
             console.log('External Ref Value changed:', newValue)
             this.resizeTerm()
         })
+        setInterval(async () => {
+            this.mterm.viewInstance.write(await this.term.readMterm())
+        }, 100)
     },
     beforeUnmount() {
         this.closeTerm()
@@ -112,5 +120,3 @@ export default {
     }
 }
 </script>
-
-<style scoped></style>

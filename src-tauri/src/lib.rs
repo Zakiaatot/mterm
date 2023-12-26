@@ -11,6 +11,7 @@ pub fn run() {
             command::read_mterm,
             command::write_mterm,
             command::wait_mterm,
+            command::set_window_size_mterm,
             command::set_read_nonblock_mterm,
             command::check_running_mterm,
         ])
