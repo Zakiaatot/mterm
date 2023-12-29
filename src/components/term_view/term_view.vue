@@ -8,14 +8,19 @@ import { Terminal } from 'xterm'
 import { FitAddon } from 'xterm-addon-fit'
 import { WebglAddon } from 'xterm-addon-webgl'
 import { getTheme } from "../../utils/theme.js"
-import { keyboardHeight } from "../../utils/keyboard.js"
+import { keyboardHeight } from "./keyboard.js"
 import { watch } from 'vue'
 import "xterm/css/xterm.css"
 export default {
     props: {
         term: {
+            tyep: Object,
             required: true,
             default: null
+        },
+        fontSize: {
+            type: Number,
+            default: 16
         }
     },
     data() {
@@ -23,10 +28,24 @@ export default {
             mterm: {
                 viewInstance: null,
                 fit: null,
-
+                reader: null,
             },
             themeObserver: null,
-            keyboardObserver: null
+            keyboardObserver: null,
+            currentTermId: null
+        }
+    },
+    watch: {
+        term: {
+            deep: true,
+            handler(newVal) {
+                if (newVal.id && newVal.id != this.currentTermId) {
+                    console.log("Change to new term: ", newVal)
+                    if (this.currentTermId != null)
+                        this.changeTerm()
+                    this.currentTermId = newVal.id
+                }
+            }
         }
     },
     methods: {
@@ -61,18 +80,32 @@ export default {
                     background: "white",
                     cursor: "black",
                     selectionBackground: "#1D232A70",
-                    // selectionInactiveBackground: "white"
                 }
             } else if (theme === 'dark') {
                 res = {
                     foreground: "white",
                     background: "#1D232A",
                     cursor: "white",
-                    // selectionBackground: "white",
-                    // selectionInactiveBackground: "white"
                 }
             }
             this.mterm.viewInstance.options.theme = res
+        },
+        // reader
+        beginReader() {
+            this.mterm.reader = setInterval(async () => {
+                if (this.term.id !== null)
+                    this.mterm.viewInstance.write(await this.term.readMterm())
+            }, 50)
+        },
+        closeReader() {
+            if (this.mterm.reader)
+                clearInterval(this.mterm.reader)
+        },
+        // writer
+        beginWriter() {
+            this.mterm.viewInstance.onData(async (data) => {
+                await this.term.writeMterm(data)
+            })
         },
         // term
         initTerm() {
@@ -80,16 +113,15 @@ export default {
                 cursorBlink: true,
                 cursorStyle: 'underline',
                 fontWeight: 700,
-                fontSize: 16,
+                fontSize: this.fontSize,
                 scrollOnUserInput: true
             })
             this.mterm.fit = new FitAddon()
             this.mterm.viewInstance.loadAddon(this.mterm.fit)
             this.setThemeOption(getTheme())
             this.mterm.viewInstance.open(this.$refs.termRootElem)
-            this.mterm.viewInstance.loadAddon(new WebglAddon())
+            // this.mterm.viewInstance.loadAddon(new WebglAddon())
             this.mterm.fit.fit()
-            this.mterm.viewInstance.onData(async (data) => { console.log(await this.term.writeMterm(data)) })
         },
         closeTerm() {
             this.mterm.viewInstance.dispose()
@@ -99,24 +131,36 @@ export default {
             const rows = this.mterm.viewInstance.rows
             const cols = this.mterm.viewInstance.cols
             this.term.setWindowSizeMterm(rows, cols)
+        },
+        //keyboard
+        initWatchKeyboard() {
+            watch(keyboardHeight, (newValue) => {
+                console.log('Keyboard height:', newValue)
+                this.resizeTerm()
+            })
+        },
+        //change term
+        changeTerm() {
+            this.closeReader()
+            this.mterm.viewInstance.write('\x1b[?25h') // 使光标显现
+            this.mterm.viewInstance.reset()
+            this.mterm.viewInstance.write(this.term.readMsg)
+            this.beginReader()
         }
     },
     mounted() {
         this.initTerm()
         this.beginObserverTheme()
+        this.initWatchKeyboard()
         window.addEventListener('resize', this.resizeTerm)
-        watch(keyboardHeight, (newValue) => {
-            console.log('External Ref Value changed:', newValue)
-            this.resizeTerm()
-        })
-        setInterval(async () => {
-            this.mterm.viewInstance.write(await this.term.readMterm())
-        }, 100)
+        this.beginWriter()
+        this.beginReader()
     },
     beforeUnmount() {
         this.closeTerm()
         this.closeObserverTheme()
         window.removeEventListener('resize', this.resizeTerm)
+        this.closeReader()
     }
 }
 </script>

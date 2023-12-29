@@ -2,18 +2,28 @@ import { invoke } from "@tauri-apps/api/primitives"
 export class Term {
     id = null
     readMsg = ""
-    constructor() {
-        this.createMterm().then(() => {
-            this.setReadNonblockMterm()
-        })
+
+    constructor(cmd, cwd, argv, envp) {
+        if (cmd === undefined || cmd === null) {
+            this.createMtermDefault().then(() => {
+                this.setReadNonblockMterm()
+            })
+        }
+        else {
+
+        }
     }
 
     destructor() {
         this.destroyMterm()
     }
 
-    async createMterm() {
+    async createMtermDefault() {
         this.id = await invoke('create_mterm_default')
+    }
+
+    async createMterm(){
+        this.id 
     }
 
     async destroyMterm() {
