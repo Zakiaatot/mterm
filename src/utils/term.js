@@ -2,6 +2,7 @@ import { invoke } from "@tauri-apps/api/primitives"
 export class Term {
     id = null
     readMsg = ""
+    alias = ""
 
     constructor(cmd, cwd, argv, envp) {
         if (cmd === undefined || cmd === null) {
@@ -22,8 +23,8 @@ export class Term {
         this.id = await invoke('create_mterm_default')
     }
 
-    async createMterm(){
-        this.id 
+    async createMterm() {
+        this.id
     }
 
     async destroyMterm() {
@@ -50,9 +51,5 @@ export class Term {
 
     async checkRunningMterm() {
         return await invoke('check_running_mterm', { id: this.id })
-    }
-
-    getReadMsg() {
-        return this.readMsg
     }
 }

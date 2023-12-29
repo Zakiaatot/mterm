@@ -4,8 +4,7 @@
     <navbar />
     <div id="main-container" class="status-bar w-screen h-screen overflow-x-hidden px-2">
       <div class="keyboard-padding-bottom w-full h-full pt-12">
-        <button class="btn btn-primary" @click="btn">change</button>
-        <term_view :term="term" :font-size="14" />
+        <term_view :term="termManage.termNow" :font-size="16" />
       </div>
     </div>
     <!-- <div class="w-12 h-12 bg-black fixed bottom-0"></div> -->
@@ -16,7 +15,7 @@
 import term_view from './components/term_view/term_view.vue'
 import navbar from './components/navbar/navbar.vue'
 import toast from './components/toast/toast.vue'
-import { Term } from './utils/term.js'
+import { termManager } from './utils/term_manager.js'
 export default {
   components: {
     navbar,
@@ -24,24 +23,14 @@ export default {
     toast
   },
   data() {
-    const termArray = []
-    for (let i = 0; i < 7; i++) {
-      termArray.push(new Term())
-    }
     return {
-      term: termArray[0],
-      termArray,
-      index: 0
+      termManage: termManager
     }
   },
   methods: {
-    btn() {
-      this.index = (this.index + 1) % 6
-      this.term = this.termArray[this.index]
-    }
   },
   mounted() {
-    document.documentElement.style.setProperty('--status-bar-height', AndroidApi.getStatusBarHeight() + 'px')
+    document.documentElement.style.setProperty('--status-bar-height', AndroidApi.getStatusBarHeight())
     setTimeout(() => {
       AndroidApi.closeSplash()
     }, 500)
@@ -51,7 +40,7 @@ export default {
 
 <style>
 :root {
-  --status-bar-height: 24px;
+  --status-bar-height: 24;
   --keyboard-padding-bottom: 0px;
 }
 
@@ -66,7 +55,7 @@ body,
 }
 
 .status-bar {
-  padding-top: var(--status-bar-height) !important;
+  padding-top: calc(var(--status-bar-height)*1px) !important;
 }
 
 .keyboard-padding-bottom {

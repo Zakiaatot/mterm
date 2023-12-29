@@ -1,5 +1,5 @@
 <template>
-    <div ref="termRootElem" class="w-full h-full">
+    <div ref="termRootElem" class="term-wrapper w-full h-full">
     </div>
 </template>
 
@@ -120,7 +120,7 @@ export default {
             this.mterm.viewInstance.loadAddon(this.mterm.fit)
             this.setThemeOption(getTheme())
             this.mterm.viewInstance.open(this.$refs.termRootElem)
-            // this.mterm.viewInstance.loadAddon(new WebglAddon())
+            this.mterm.viewInstance.loadAddon(new WebglAddon())
             this.mterm.fit.fit()
         },
         closeTerm() {
@@ -164,3 +164,15 @@ export default {
     }
 }
 </script>
+<style scoped>
+/*  customize scroll bar style */
+.term-wrapper>>>.xterm-viewport::-webkit-scrollbar {
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 5px;
+}
+
+.term-wrapper>>>.xterm-viewport::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 10px;
+}
+</style>

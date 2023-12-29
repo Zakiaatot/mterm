@@ -12,8 +12,9 @@
         </div>
         <div class="drawer-side">
             <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-            <div class="p-4 w-60 min-h-full bg-base-200 text-base-content status-bar">
-                <div class="navbar-center w-full flex justify-center items-center">
+            <div class="w-60 min-h-full bg-base-200 text-base-content">
+                <div class="drawer-head status-bar navbar-center w-full flex justify-center items-center backdrop-blur-sm bg-opacity-70
+                     shadow-sm">
                     <button class="rotate btn btn-ghost btn-circle">
                         <svg t="1703166925072" class="w-6 h-6 fill-black dark:fill-white" viewBox="0 0 1024 1024"
                             version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2311" width="200" height="200">
@@ -23,6 +24,9 @@
                         </svg>
                     </button>
                     <a class=" select-none text-xl font-extrabold">Mterm</a>
+                </div>
+                <div class="drawer-body absolute pt-12 w-full overflow-y-auto px-4 -z-10">
+                    <div v-for="i in 100" :key="i" class=" text-lg">123</div>
                 </div>
             </div>
         </div>
@@ -59,5 +63,10 @@
 
 .rotate:hover {
     animation: rotate-reverse-ani 1s ease-in-out,
+}
+
+.drawer-body {
+    top: calc(var(--status-bar-height)*1px);
+    bottom: 0;
 }
 </style>
