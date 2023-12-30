@@ -13,7 +13,7 @@
         <div class="drawer-side">
             <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
             <div class="w-60 min-h-full bg-base-200 text-base-content">
-                <div class="drawer-head status-bar navbar-center w-full flex justify-center items-center backdrop-blur-sm bg-opacity-70
+                <div class="drawer-head status-bar navbar-center w-full flex justify-center items-center 
                      shadow-sm">
                     <button class="rotate btn btn-ghost btn-circle">
                         <svg t="1703166925072" class="w-6 h-6 fill-black dark:fill-white" viewBox="0 0 1024 1024"
@@ -25,8 +25,8 @@
                     </button>
                     <a class=" select-none text-xl font-extrabold">Mterm</a>
                 </div>
-                <div class="drawer-body absolute pt-12 w-full overflow-y-auto px-4 -z-10">
-                    <div v-for="i in 100" :key="i" class=" text-lg">123</div>
+                <div class="drawer-body absolute w-full overflow-y-auto -z-10">
+                    <drawer_item v-for="i in 1" :key="i" />
                 </div>
             </div>
         </div>
@@ -34,6 +34,13 @@
 </template>
 
 <script>
+import drawer_item from './drawer-item.vue'
+
+export default {
+    components: {
+        drawer_item
+    }
+}
 </script>
 
 <style scoped>
@@ -66,7 +73,7 @@
 }
 
 .drawer-body {
-    top: calc(var(--status-bar-height)*1px);
+    top: calc(var(--status-bar-height)*1px + 3rem);
     bottom: 0;
 }
 </style>

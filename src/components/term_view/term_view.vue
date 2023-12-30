@@ -164,15 +164,3 @@ export default {
     }
 }
 </script>
-<style scoped>
-/*  customize scroll bar style */
-.term-wrapper>>>.xterm-viewport::-webkit-scrollbar {
-    background-color: rgba(0, 0, 0, 0.3);
-    width: 5px;
-}
-
-.term-wrapper>>>.xterm-viewport::-webkit-scrollbar-thumb {
-    background: #000;
-    border-radius: 10px;
-}
-</style>

@@ -2,7 +2,7 @@
   <div>
     <toast />
     <navbar />
-    <div id="main-container" class="status-bar w-screen h-screen overflow-x-hidden px-2">
+    <div id="main-container" class="status-bar w-screen h-screen overflow-x-hidden px-1">
       <div class="keyboard-padding-bottom w-full h-full pt-12">
         <term_view :term="termManage.termNow" :font-size="16" />
       </div>
@@ -52,6 +52,17 @@ body,
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+}
+
+
+*::-webkit-scrollbar {
+  background-color: rgba(0, 0, 0, 0) !important;
+  width: 3px !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: hsl(var(--bc) / var(--tw-text-opacity, 1)) !important;
+  border-radius: 10px !important;
 }
 
 .status-bar {
