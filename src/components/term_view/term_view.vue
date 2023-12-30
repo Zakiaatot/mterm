@@ -121,7 +121,7 @@ export default {
             this.setThemeOption(getTheme())
             this.mterm.viewInstance.open(this.$refs.termRootElem)
             this.mterm.viewInstance.loadAddon(new WebglAddon())
-            this.mterm.fit.fit()
+            setTimeout(() => { this.mterm.fit.fit() }, 0)
         },
         closeTerm() {
             this.mterm.viewInstance.dispose()

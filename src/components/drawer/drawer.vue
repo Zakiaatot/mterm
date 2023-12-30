@@ -26,7 +26,9 @@
                     <a class=" select-none text-xl font-extrabold">Mterm</a>
                 </div>
                 <div class="drawer-body absolute w-full overflow-y-auto -z-10">
-                    <drawer_item v-for="i in 1" :key="i" />
+                    <ul class="menu menu-md w-full rounded-box">
+                        <drawer_item v-for="i in 10" :key="i" />
+                    </ul>
                 </div>
             </div>
         </div>

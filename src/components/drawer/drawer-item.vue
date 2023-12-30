@@ -1,7 +1,10 @@
 <template>
-    <div class="w-full h-12 bg-red-500">
-
-    </div>
+    <li>
+        <a>
+            123
+            <button class="btn btn-primary" @click.stop></button>
+        </a>
+    </li>
 </template>
 
 <script>
