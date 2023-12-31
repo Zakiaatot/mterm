@@ -26,8 +26,8 @@
                     <a class=" select-none text-xl font-extrabold">Mterm</a>
                 </div>
                 <div class="drawer-body absolute w-full overflow-y-auto -z-10">
-                    <ul class="menu menu-md w-full rounded-box">
-                        <drawer_item v-for="i in 10" :key="i" />
+                    <ul class="menu menu-lg w-full rounded-box">
+                        <drawer_item v-for="i in 10" :key="i" @click="console.log(123)" />
                     </ul>
                 </div>
             </div>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import drawer_item from './drawer-item.vue'
+import drawer_item from './drawer_item.vue'
 
 export default {
     components: {
