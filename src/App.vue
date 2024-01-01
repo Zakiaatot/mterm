@@ -2,9 +2,9 @@
   <div>
     <toast />
     <navbar />
-    <div id="main-container" class="status-bar w-screen h-screen overflow-x-hidden px-1">
+    <div id="main-container" class="status-bar w-screen h-screen overflow-hidden px-1">
       <div class="keyboard-padding-bottom w-full h-full pt-12">
-        <term_view :term="termManage.termNow" :font-size="16" />
+        <term_view :term="termManager.termNow" :font-size="16" />
       </div>
     </div>
     <!-- <div class="w-12 h-12 bg-black fixed bottom-0"></div> -->
@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      termManage: termManager
+      termManager
     }
   },
   methods: {

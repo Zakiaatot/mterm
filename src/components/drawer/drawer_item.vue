@@ -1,20 +1,12 @@
 <template>
     <li class="w-full">
         <a class="w-full">
-            <div class=" text-xl font-semibold w-28 whitespace-nowrap overflow-hidden text-ellipsis">
+            <div class=" text-lg font-semibold w-36 whitespace-nowrap overflow-hidden text-ellipsis">
                 终端n号
             </div>
-            <div class="operator flex justify-evenly w-20">
-                <button @click.stop>
-                    <svg t="1704003185691" class="icon w-6 h-6" viewBox="0 0 1024 1024" version="1.1"
-                        xmlns="http://www.w3.org/2000/svg" p-id="9172" width="200" height="200">
-                        <path
-                            d="M257.7 752c2 0 4-0.2 6-0.5L431.9 722c2-0.4 3.9-1.3 5.3-2.8l423.9-423.9c3.9-3.9 3.9-10.2 0-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2c-1.9 11.1 1.5 21.9 9.4 29.8 6.6 6.4 14.9 9.9 23.8 9.9z m67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
-                            p-id="9173"></path>
-                    </svg>
-                </button>
-                <button @click.stop>
-                    <svg t="1704002804153" class="icon h-6 w-6" viewBox="0 0 1024 1024" version="1.1"
+            <div class="operator flex justify-evenly w-12">
+                <button class="btn btn-error btn-sm btn-square" @click.stop>
+                    <svg t="1704002804153" class="icon h-5 w-5" viewBox="0 0 1024 1024" version="1.1"
                         xmlns="http://www.w3.org/2000/svg" p-id="2111" width="200" height="200">
                         <path
                             d="M768 384c-19.2 0-32 12.8-32 32l0 377.6c0 25.6-19.2 38.4-38.4 38.4L326.4 832c-25.6 0-38.4-19.2-38.4-38.4L288 416C288 396.8 275.2 384 256 384S224 396.8 224 416l0 377.6c0 57.6 44.8 102.4 102.4 102.4l364.8 0c57.6 0 102.4-44.8 102.4-102.4L793.6 416C800 396.8 787.2 384 768 384z"
@@ -36,13 +28,17 @@
 </template>
 
 <script>
+import { termManager } from "../../utils/term_manager.js"
+export default {
+    methods: {
+        closeTerm() {
+
+        }
+    }
+}
 </script>
 
 <style scoped>
-.icon path {
-    fill: hsl(var(--bc) / var(--tw-text-opacity, 1));
-}
-
 .operator button:active {
     animation: scale-ani ease-in-out .2s;
 }

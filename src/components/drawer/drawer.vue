@@ -14,7 +14,7 @@
             <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
             <div class="w-60 min-h-full bg-base-200 text-base-content">
                 <div class="drawer-head status-bar navbar-center w-full flex justify-center items-center 
-                     shadow-sm">
+                     ">
                     <button class="rotate btn btn-ghost btn-circle">
                         <svg t="1703166925072" class="w-6 h-6 fill-black dark:fill-white" viewBox="0 0 1024 1024"
                             version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2311" width="200" height="200">
@@ -26,8 +26,10 @@
                     <a class=" select-none text-xl font-extrabold">Mterm</a>
                 </div>
                 <div class="drawer-body absolute w-full overflow-y-auto -z-10">
-                    <ul class="menu menu-lg w-full rounded-box">
-                        <drawer_item v-for="i in 10" :key="i" @click="console.log(123)" />
+                    <ul class="menu menu-md w-full rounded-box">
+                        <drawer_item v-for="i in termManager.termArray" :key="i" @click="console.log(123)" />
+                        <button class="mt-6 btn btn-neutral text-3xl"
+                        @click="termManager.createTerm">+</button>
                     </ul>
                 </div>
             </div>
@@ -37,11 +39,16 @@
 
 <script>
 import drawer_item from './drawer_item.vue'
-
+import { termManager } from '../../utils/term_manager'
 export default {
     components: {
         drawer_item
-    }
+    },
+    data() {
+        return {
+            termManager
+        }
+    },
 }
 </script>
 
