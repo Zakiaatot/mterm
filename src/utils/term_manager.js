@@ -23,10 +23,14 @@ class TermManager {
     closeTerm(index) {
         if (this.termArray.length == 1)
             return toast.error("Please leave at least one terminal!")
-
+        const delNow = (this.termNow.uuid === this.termArray[index].uuid)
+        const msg = "Closed " + (this.termNow.alias === "" ? index : this.termNow.alias) + " ."
         this.termArray[index].destroyMterm()
         this.termArray.splice(index, 1)
-        this.switchTerm(0)
+        if (delNow)
+            this.switchTerm(index - 1)
+        else
+            toast.success(msg)
     }
 
     switchTerm(index) {

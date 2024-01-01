@@ -1,6 +1,7 @@
 <template>
   <div>
     <toast />
+    <my_dialog />
     <navbar />
     <div id="main-container" class="status-bar w-screen h-screen overflow-hidden px-1">
       <div class="keyboard-padding-bottom w-full h-full pt-12">
@@ -15,12 +16,14 @@
 import term_view from './components/term_view/term_view.vue'
 import navbar from './components/navbar/navbar.vue'
 import toast from './components/toast/toast.vue'
+import my_dialog from './components/my_dialog/my_dialog.vue'
 import { termManager } from './utils/term_manager.js'
 export default {
   components: {
     navbar,
     term_view,
-    toast
+    toast,
+    my_dialog
   },
   data() {
     return {

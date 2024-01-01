@@ -1,5 +1,6 @@
 import { invoke } from "@tauri-apps/api/primitives"
 
+const MAX_STR_LEN = 1024 * 8
 let counter = 0
 
 export class Term {
@@ -42,6 +43,8 @@ export class Term {
     async readMterm() {
         const res = await invoke('read_mterm', { id: this.id })
         this.readMsg += res
+        if (this.readMsg.length > MAX_STR_LEN)
+            this.readMsg = this.readMsg.slice(this.readMsg.length - MAX_STR_LEN)
         return res
     }
 

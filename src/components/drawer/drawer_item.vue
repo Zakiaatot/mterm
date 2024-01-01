@@ -1,6 +1,7 @@
 <template>
     <li class="w-full">
-        <a class="w-full" :class="active ? 'active' : ''" @click="this.termManager.switchTerm(this.index)">
+        <a class="w-full" :class="active ? 'active' : ''" @click="this.termManager.switchTerm(this.index)"
+            @touchstart="this.startTouch" @touchend="this.cancelTouch" @touchcancel="this.cancelTouch">
             <div class=" text-lg font-semibold w-36 whitespace-nowrap overflow-hidden text-ellipsis">
                 {{ this.term.alias === "" ? index : this.term.alias }}
             </div>
@@ -28,6 +29,7 @@
 </template>
 
 <script>
+import { myDialog } from '../my_dialog/my_dialog.js'
 export default {
     props: {
         index: {
@@ -45,12 +47,23 @@ export default {
     },
     data() {
         return {
-            termManager: this.$parent.termManager
+            termManager: this.$parent.termManager,
+            longPressTimer: null,
+            myDialog
         }
     },
     methods: {
         closeTerm() {
             this.termManager.closeTerm(this.index)
+        },
+        startTouch() {
+            this.longPressTimer = setTimeout(() => {
+                console.log(this.myDialog)
+                this.myDialog.openModal(this.myDialog.DIALOG_TYPE.SET_ALIAS)
+            }, 500)
+        },
+        cancelTouch() {
+            clearTimeout(this.longPressTimer)
         }
     }
 }

@@ -95,7 +95,7 @@ export default {
             this.mterm.reader = setInterval(async () => {
                 if (this.term.id !== null)
                     this.mterm.viewInstance.write(await this.term.readMterm())
-            }, 50)
+            }, 5)
         },
         closeReader() {
             if (this.mterm.reader)
