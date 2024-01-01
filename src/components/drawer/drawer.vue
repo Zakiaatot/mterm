@@ -27,9 +27,9 @@
                 </div>
                 <div class="drawer-body absolute w-full overflow-y-auto -z-10">
                     <ul class="menu menu-md w-full rounded-box">
-                        <drawer_item v-for="i in termManager.termArray" :key="i" @click="console.log(123)" />
-                        <button class="mt-6 btn btn-neutral text-3xl"
-                        @click="termManager.createTerm">+</button>
+                        <drawer_item v-for="(i, index) in termManager.termArray" :key="i.uuid" :term="i" :index="index"
+                            :active="termManager.termNow.id === i.id" />
+                        <button class="mt-6 btn btn-neutral text-3xl" @click="termManager.createTerm">+</button>
                     </ul>
                 </div>
             </div>

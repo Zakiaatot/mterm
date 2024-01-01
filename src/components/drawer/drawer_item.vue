@@ -1,12 +1,12 @@
 <template>
     <li class="w-full">
-        <a class="w-full">
+        <a class="w-full" :class="active ? 'active' : ''" @click="this.termManager.switchTerm(this.index)">
             <div class=" text-lg font-semibold w-36 whitespace-nowrap overflow-hidden text-ellipsis">
-                终端n号
+                {{ this.term.alias === "" ? index : this.term.alias }}
             </div>
             <div class="operator flex justify-evenly w-12">
-                <button class="btn btn-error btn-sm btn-square" @click.stop>
-                    <svg t="1704002804153" class="icon h-5 w-5" viewBox="0 0 1024 1024" version="1.1"
+                <button class="btn btn-error btn-sm btn-square" @click.stop="closeTerm">
+                    <svg t=" 1704002804153" class="icon h-5 w-5" viewBox="0 0 1024 1024" version="1.1"
                         xmlns="http://www.w3.org/2000/svg" p-id="2111" width="200" height="200">
                         <path
                             d="M768 384c-19.2 0-32 12.8-32 32l0 377.6c0 25.6-19.2 38.4-38.4 38.4L326.4 832c-25.6 0-38.4-19.2-38.4-38.4L288 416C288 396.8 275.2 384 256 384S224 396.8 224 416l0 377.6c0 57.6 44.8 102.4 102.4 102.4l364.8 0c57.6 0 102.4-44.8 102.4-102.4L793.6 416C800 396.8 787.2 384 768 384z"
@@ -28,11 +28,29 @@
 </template>
 
 <script>
-import { termManager } from "../../utils/term_manager.js"
 export default {
+    props: {
+        index: {
+            type: Number,
+            required: true
+        },
+        term: {
+            type: Object,
+            required: true
+        },
+        active: {
+            type: Boolean,
+            required: true
+        }
+    },
+    data() {
+        return {
+            termManager: this.$parent.termManager
+        }
+    },
     methods: {
         closeTerm() {
-
+            this.termManager.closeTerm(this.index)
         }
     }
 }

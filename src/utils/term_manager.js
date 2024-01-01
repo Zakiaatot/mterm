@@ -14,36 +14,32 @@ class TermManager {
     createTerm() {
         if (this.termArray.length < MAX_TERM) {
             this.termArray.push(new Term())
-            this.termNow = this.termArray[this.termArray.length - 1]
+            this.switchTerm(this.termArray.length - 1)
         }
         else
             toast.error("Terminal limit reached!")
     }
 
     closeTerm(index) {
-        if (0 <= index < this.termArray.length && this.termArray[index]) {
-            this.termArray[index].destroyMterm()
-            this.termArray.splice(index, 1)
-        }
+        if (this.termArray.length == 1)
+            return toast.error("Please leave at least one terminal!")
+
+        this.termArray[index].destroyMterm()
+        this.termArray.splice(index, 1)
+        this.switchTerm(0)
     }
 
     switchTerm(index) {
-        if (0 <= index < this.termArray.length && this.termArray[index]) {
-            this.termNow = this.termArray[index]
-        }
+        this.termNow = this.termArray[index]
+        toast.success("Switch to " + (this.termNow.alias === "" ? index : this.termNow.alias) + " .")
     }
 
     setAlias(index, alias) {
-        if (0 <= index < this.termArray.length && this.termArray[index]) {
-            this.termArray[index].alias = alias
-        }
+        this.termArray[index].alias = alias
     }
 
     getAlias(index) {
-        if (0 <= index < this.termArray.length && this.termArray[index]) {
-            return this.termArray[index].alias
-        }
-        return null
+        return this.termArray[index].alias
     }
 
 }

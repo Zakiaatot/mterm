@@ -1,8 +1,12 @@
 import { invoke } from "@tauri-apps/api/primitives"
+
+let counter = 0
+
 export class Term {
     id = null
     readMsg = ""
     alias = ""
+    uuid = counter++
 
     constructor(cmd, cwd, argv, envp) {
         if (cmd === undefined || cmd === null) {

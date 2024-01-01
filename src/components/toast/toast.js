@@ -1,4 +1,4 @@
-const TOAST_TIME = 2000
+const TOAST_TIME = 1000
 class Toast {
     toastQueue = []
     id = 0

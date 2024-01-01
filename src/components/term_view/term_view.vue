@@ -142,10 +142,12 @@ export default {
         //change term
         changeTerm() {
             this.closeReader()
-            this.mterm.viewInstance.write('\x1b[?25h') // 使光标显现
-            this.mterm.viewInstance.reset()
-            this.mterm.viewInstance.write(this.term.readMsg)
-            this.beginReader()
+            setTimeout(() => {
+                this.mterm.viewInstance.write('\x1b[?25h') // 使光标显现
+                this.mterm.viewInstance.reset()
+                this.mterm.viewInstance.write(this.term.readMsg)
+                this.beginReader()
+            }, 1)
         }
     },
     mounted() {
