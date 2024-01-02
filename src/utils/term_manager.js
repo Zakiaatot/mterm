@@ -24,7 +24,7 @@ class TermManager {
         if (this.termArray.length == 1)
             return toast.error("Please leave at least one terminal!")
         const delNow = (this.termNow.uuid === this.termArray[index].uuid)
-        const msg = "Closed " + (this.termNow.alias === "" ? index : this.termNow.alias) + " ."
+        const msg = "Closed " + (this.termArray[index].alias === "" ? index : this.termArray[index].alias) + " ."
         this.termArray[index].destroyMterm()
         this.termArray.splice(index, 1)
         if (delNow)

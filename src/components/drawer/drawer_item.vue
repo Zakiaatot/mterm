@@ -47,7 +47,7 @@ export default {
     },
     data() {
         return {
-            termManager: this.$parent.termManager,
+            termManager: this.$parent.$parent.termManager,
             longPressTimer: null,
             myDialog
         }
@@ -58,8 +58,7 @@ export default {
         },
         startTouch() {
             this.longPressTimer = setTimeout(() => {
-                console.log(this.myDialog)
-                this.myDialog.openModal(this.myDialog.DIALOG_TYPE.SET_ALIAS)
+                this.myDialog.openModal(this.myDialog.DIALOG_TYPE.SET_ALIAS, { index: this.index, elem: this })
             }, 500)
         },
         cancelTouch() {

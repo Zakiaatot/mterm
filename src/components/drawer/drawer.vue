@@ -25,11 +25,14 @@
                     </button>
                     <a class=" select-none text-xl font-extrabold">Mterm</a>
                 </div>
-                <div class="drawer-body absolute w-full overflow-y-auto -z-10">
+                <div class="drawer-body absolute w-full overflow-y-auto overflow-x-hidden -z-10">
                     <ul class="menu menu-md w-full rounded-box">
-                        <drawer_item v-for="(i, index) in termManager.termArray" :key="i.uuid" :term="i" :index="index"
-                            :active="termManager.termNow.id === i.id" />
-                        <button class="mt-6 btn btn-neutral text-3xl" @click="termManager.createTerm">+</button>
+                        <TransitionGroup name="fade">
+                            <drawer_item v-for="(i, index) in termManager.termArray" :key="i.uuid" :term="i" :index="index"
+                                :active="termManager.termNow.id === i.id" />
+                            <button class="mt-6 btn btn-neutral text-3xl" @click="termManager.createTerm">+</button>
+                        </TransitionGroup>
+
                     </ul>
                 </div>
             </div>
@@ -84,5 +87,31 @@ export default {
 .drawer-body {
     top: calc(var(--status-bar-height)*1px + 3rem);
     bottom: 0;
+}
+
+
+.container {
+    position: relative;
+    padding: 0;
+}
+
+/* 1. 声明过渡效果 */
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+/* 2. 声明进入和离开的状态 */
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+    transform: scaleY(0.01) translate(30px, 0);
+}
+
+/* 3. 确保离开的项目被移除出了布局流
+      以便正确地计算移动时的动画效果。 */
+.fade-leave-active {
+    position: absolute;
 }
 </style>
