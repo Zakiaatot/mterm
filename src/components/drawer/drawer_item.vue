@@ -1,7 +1,8 @@
 <template>
     <li class="w-full">
         <a class="w-full" :class="active ? 'active' : ''" @click="this.termManager.switchTerm(this.index)"
-            @touchstart="this.startTouch" @touchend="this.cancelTouch" @touchcancel="this.cancelTouch">
+            @touchstart="this.startTouch" @touchmove="this.cancelTouch" @touchend="this.cancelTouch"
+            @touchcancel="this.cancelTouch">
             <div class=" text-lg font-semibold w-36 whitespace-nowrap overflow-hidden text-ellipsis">
                 {{ this.term.alias === "" ? index : this.term.alias }}
             </div>
