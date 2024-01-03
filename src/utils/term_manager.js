@@ -35,7 +35,7 @@ class TermManager {
 
     switchTerm(index) {
         this.termNow = this.termArray[index]
-        toast.success("Switch to " + (this.termNow.alias === "" ? index : this.termNow.alias) + " .")
+        toast.success("Switch to " + (this.termNow.alias === "" ? index : this.termNow.alias))
     }
 
     setAlias(index, alias) {
