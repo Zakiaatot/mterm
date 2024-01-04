@@ -103,7 +103,7 @@ export default {
             this.termManager.createTerm()
             if (this.$route.path !== '/term')
                 this.$router.replace('/term')
-            this.closeDrawer()
+            // this.closeDrawer()
         }
     },
     mounted() {

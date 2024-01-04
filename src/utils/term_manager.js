@@ -27,8 +27,12 @@ class TermManager {
         const msg = "Closed " + (this.termArray[index].alias === "" ? index : this.termArray[index].alias) + " ."
         this.termArray[index].destroyMterm()
         this.termArray.splice(index, 1)
-        if (delNow)
-            this.switchTerm(index - 1)
+        if (delNow) {
+            if (index === 0)
+                this.switchTerm(0)
+            else
+                this.switchTerm(index - 1)
+        }
         else
             toast.success(msg)
     }

@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import termPage from '../pages/termPage.vue'
+import aboutPage from '../pages/aboutPage.vue'
+import settingPage from '../pages/settingPage.vue'
 
 const router = createRouter({
     history: createWebHashHistory(),  // hash 模式
@@ -12,17 +14,17 @@ const router = createRouter({
         {
             path: '/term',
             name: 'term',
-            component: termPage,
+            component: termPage
         },
         {
             path: '/about',
             name: 'about',
-            component: () => import('../pages/aboutPage.vue')
+            component: aboutPage
         },
         {
             path: '/setting',
             name: 'setting',
-            component: () => import('../pages/settingPage.vue')
+            component: settingPage
         }
     ]
 })

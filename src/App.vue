@@ -4,7 +4,7 @@
     <my_dialog />
     <navbar />
     <div id="main-container" class="status-bar w-screen h-screen overflow-hidden px-1">
-      <div class="keyboard-padding-bottom w-full h-full pt-12">
+      <div class="w-full h-full pt-12">
         <RouterView v-slot="{ Component }">
           <Transition mode="out-in" name="slide-up">
             <component :is="Component" :key="$route.fullPath" />
@@ -37,7 +37,7 @@ export default {
 <style>
 :root {
   --status-bar-height: 24;
-  --keyboard-padding-bottom: 0px;
+  --keyboard-padding-bottom: 16px;
 }
 
 *,
