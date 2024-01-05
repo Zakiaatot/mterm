@@ -10,6 +10,8 @@ import android.annotation.SuppressLint
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewTreeObserver
@@ -48,6 +50,15 @@ abstract class WryActivity : AppCompatActivity() {
       }
       val dm = applicationContext.resources.displayMetrics;
       return (height / dm.density).toInt();
+    }
+    
+    @JavascriptInterface
+    fun vibrate(milliseconds: Long) {
+      val vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
+      if (vibrator.hasVibrator()) {
+        val vibrationEffect = VibrationEffect.createOneShot(milliseconds, VibrationEffect.DEFAULT_AMPLITUDE)
+        vibrator.vibrate(vibrationEffect)
+      }
     }
   }
 
