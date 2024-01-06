@@ -29,6 +29,11 @@ export default {
                 viewInstance: null,
                 fit: null,
                 reader: null,
+                lock: true,
+                keyFlag: {
+                    ctrlKey: false,
+                    altKey: false
+                }
             },
             themeObserver: null,
             keyboardObserver: null,
@@ -104,6 +109,23 @@ export default {
         // writer
         beginWriter() {
             this.mterm.viewInstance.onData(async (data) => {
+                if (this.mterm.keyFlag.altKey || this.mterm.keyFlag.ctrlKey) {
+                    console.log(this.mterm.keyFlag)
+                    const altKey = this.mterm.keyFlag.altKey
+                    const ctrlKey = this.mterm.keyFlag.ctrlKey
+                    this.mterm.keyFlag.altKey = false
+                    this.mterm.keyFlag.ctrlKey = false
+                    let keyCode = data[0].charCodeAt(0)
+                    if (keyCode >= 97 && keyCode <= 122) keyCode = keyCode - 32
+
+                    return this.mterm.viewInstance.textarea.dispatchEvent(
+                        new KeyboardEvent('keydown', {
+                            keyCode,
+                            ctrlKey,
+                            altKey
+                        })
+                    )
+                }
                 await this.term.writeMterm(data)
             })
         },
@@ -124,6 +146,10 @@ export default {
             setTimeout(() => {
                 this.mterm.fit.fit()
             }, 0)
+            this.mterm.viewInstance.onBell(() => {
+                if (!this.mterm.lock)
+                    AndroidApi.vibrate(100)
+            })
         },
         closeTerm() {
             // this.mterm.viewInstance.dispose()
@@ -138,6 +164,7 @@ export default {
             if (this.term.id !== null && this.term.readMsg !== "") {
                 this.mterm.viewInstance.write(this.term.readMsg)
             }
+            setTimeout(() => { this.mterm.lock = false, 0 })
         },
         //keyboard
         initWatchKeyboard() {
@@ -149,11 +176,13 @@ export default {
         //change term
         changeTerm() {
             this.closeReader()
+            this.mterm.lock = true
             setTimeout(() => {
                 this.mterm.viewInstance.write('\x1b[?25h') // 使光标显现
                 this.mterm.viewInstance.reset()
                 this.mterm.viewInstance.write(this.term.readMsg)
                 this.beginReader()
+                setTimeout(() => { this.mterm.lock = false }, 0)
             }, 1)
         }
     },
