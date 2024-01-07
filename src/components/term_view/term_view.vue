@@ -18,9 +18,9 @@ export default {
             required: true,
             default: null
         },
-        fontSize: {
-            type: Number,
-            default: 16
+        termViewConfig: {
+            type: Object,
+            required: true
         }
     },
     data() {
@@ -52,10 +52,12 @@ export default {
                 }
             }
         },
-        fontSize: {
+        termViewConfig: {
             deep: true,
             handler(newVal) {
-                this.mterm.viewInstance.options.fontSize = newVal
+                for (let key in newVal) {
+                    this.mterm.viewInstance.options[key] = newVal[key]
+                }
                 this.mterm.fit.fit()
             }
         }
@@ -138,13 +140,7 @@ export default {
         },
         // term
         initTerm() {
-            this.mterm.viewInstance = new Terminal({
-                cursorBlink: true,
-                cursorStyle: 'underline',
-                fontWeight: 700,
-                fontSize: this.fontSize,
-                scrollOnUserInput: true
-            })
+            this.mterm.viewInstance = new Terminal(this.termViewConfig)
             this.mterm.fit = new FitAddon()
             this.mterm.viewInstance.loadAddon(this.mterm.fit)
             this.setThemeOption(getTheme())
