@@ -1,0 +1,6 @@
+class TermViewConfig {
+    
+    constructor() {
+
+    }
+}

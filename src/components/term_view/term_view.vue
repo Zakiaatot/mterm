@@ -51,6 +51,13 @@ export default {
                     this.currentTermId = newVal.id
                 }
             }
+        },
+        fontSize: {
+            deep: true,
+            handler(newVal) {
+                this.mterm.viewInstance.options.fontSize = newVal
+                this.mterm.fit.fit()
+            }
         }
     },
     methods: {
