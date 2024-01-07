@@ -11,7 +11,7 @@
 import term_view from '../components/term_view/term_view.vue'
 import virtual_keyboard from '../components/virtual_keyboard/virtual_keyboard.vue'
 import { termManager } from '../utils/term_manager.js'
-import { termViewConfig } from '../utils/term_view_config.js'
+import { termViewConfig } from '../components/term_view/term_view_config.js'
 export default {
     components: {
         term_view,
