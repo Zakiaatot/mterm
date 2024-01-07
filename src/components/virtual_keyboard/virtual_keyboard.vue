@@ -99,7 +99,7 @@ export default {
         initWatchKeyboard() {
             watch(keyboardHeight, (newValue) => {
                 const totalHeight = document.documentElement.clientHeight
-                if (newValue + 48 + 64 > totalHeight) {
+                if (newValue + 48 + 100 > totalHeight) {
                     toast.error("Client heigth is too small!")
                     this.termViewRef.mterm.viewInstance.blur()
                 }
