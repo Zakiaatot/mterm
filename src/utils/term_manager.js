@@ -8,7 +8,9 @@ class TermManager {
     termNow = null
 
     constructor() {
-        this.createTerm()
+        if (localStorage.getItem('initLock')) {
+            this.createTerm()
+        }
     }
 
     createTerm() {

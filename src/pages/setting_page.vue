@@ -1,6 +1,6 @@
 <template>
     <div class="px-2 w-full h-full overflow-y-scroll select-none relative z-10">
-        <div class="w-full py-2">
+        <div class="w-full py-2 max-w-sm mx-auto">
             <div class=" text-lg font-semibold py-2 flex justify-center"># Preview</div>
             <div class="mockup-window border bg-base-300">
                 <div class="h-28 w-full bg-base-100">
@@ -8,7 +8,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-full py-2">
+        <div class="w-full py-2 max-w-sm mx-auto">
             <div class=" text-lg font-semibold py-2 flex justify-center"># Font Size</div>
             <input v-model="config.fontSize" type="range" min="10" max="30" value="16" class="range range-sm" step="2" />
             <div class="w-full flex justify-between text-xs px-2">
@@ -25,7 +25,7 @@
                 <span>30</span>
             </div>
         </div>
-        <div class="w-full py-2">
+        <div class="w-full py-2 max-w-sm mx-auto">
             <div class=" text-lg font-semibold py-2 flex justify-center"># Font Weight</div>
             <input v-model="config.fontWeight" type="range" min="100" max="700" value="700" class="range range-sm"
                 step="600" />
@@ -34,7 +34,7 @@
                 <span>bold</span>
             </div>
         </div>
-        <div class="w-full py-2">
+        <div class="w-full py-2 max-w-sm mx-auto">
             <div class=" text-lg font-semibold py-2 flex justify-center"># Cursor Style</div>
             <div class="flex w-full justify-center items-center">
                 <div role="tablist" class="tabs tabs-boxed">

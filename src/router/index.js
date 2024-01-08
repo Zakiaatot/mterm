@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import term_page from '../pages/term_page.vue'
 import about_page from '../pages/about_page.vue'
 import setting_page from '../pages/setting_page.vue'
+import init_page from '../pages/init_page.vue'
 
 const router = createRouter({
     history: createWebHashHistory(),  // hash 模式
@@ -9,7 +10,12 @@ const router = createRouter({
         {
             path: '/',
             name: 'index',
-            redirect: '/term'
+            redirect: '/init'
+        },
+        {
+            path: '/init',
+            name: 'init',
+            component: init_page
         },
         {
             path: '/term',
