@@ -60,6 +60,18 @@ abstract class WryActivity : AppCompatActivity() {
         vibrator.vibrate(vibrationEffect)
       }
     }
+    
+    @JavascriptInterface
+    fun getOsArch(): String {
+      val arch = Build.CPU_ABI
+      return when {
+        arch.startsWith("arm64") || arch.startsWith("aarch64") -> "aarch64"
+        arch.startsWith("arm") -> "arm"
+        arch.startsWith("x86_64") -> "x86_64"
+        arch.startsWith("x86") -> "i686"
+        else -> "unknown"
+      }
+    }
   }
 
   fun setStatusBarTextColor(light: Boolean) {

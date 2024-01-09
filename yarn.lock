@@ -180,6 +180,11 @@
   resolved "https://registry.yarnpkg.com/@tauri-apps/api/-/api-2.0.0-alpha.12.tgz#0e5d77be29b63c91ddcb9890c97157b56df2aa84"
   integrity sha512-acpNZQxFgHMHC5qV/IUg4IL/xmypzfxHB4ECkwb58fT48H4zBmklNd5TC0k7BvLUBoSmmgHc4InbYwQai392Yw==
 
+"@tauri-apps/api@2.0.0-alpha.13":
+  version "2.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@tauri-apps/api/-/api-2.0.0-alpha.13.tgz#54a080fe7f61715a817828ab1041813a8b9136e6"
+  integrity sha512-sGgCkFahF3OZAHoGN5Ozt9WK7wJlbVZSgWpPQKNag4nSOX1+Py6VDRTEWriiJHDiV+gg31CWHnNXRy6TFoZmdA==
+
 "@tauri-apps/cli-darwin-arm64@2.0.0-alpha.18":
   version "2.0.0-alpha.18"
   resolved "https://registry.yarnpkg.com/@tauri-apps/cli-darwin-arm64/-/cli-darwin-arm64-2.0.0-alpha.18.tgz#0c234492f7debc2dee0c312aba3f789ca31846ef"
@@ -252,6 +257,13 @@
   integrity sha512-Go/+EwGVuAXbSg2l2M5E2gT6cir66KV4CXC9P4gPHeead8Ar/B9wQvuINzcrYzL/HCcL7fFfKlqqu/XPTN2qvQ==
   dependencies:
     "@tauri-apps/api" "2.0.0-alpha.12"
+
+"@tauri-apps/plugin-upload@^2.0.0-alpha.5":
+  version "2.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@tauri-apps/plugin-upload/-/plugin-upload-2.0.0-alpha.5.tgz#37bc47d938fefd5dca165e9c21c4c81e5e9a7d3c"
+  integrity sha512-3Jytf5l4dY5btHUfLNahnyvUzufJoFETM+g5u1zTilJv0MyJqhd8pN5/EU/AsXemlU16u/tpr5xibNGKofYWvA==
+  dependencies:
+    "@tauri-apps/api" "2.0.0-alpha.13"
 
 "@vitejs/plugin-vue@^4.2.3":
   version "4.5.2"

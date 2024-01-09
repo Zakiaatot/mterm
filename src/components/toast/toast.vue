@@ -1,5 +1,5 @@
 <template>
-    <div class="custom-toast select-none top-14 z-[99]">
+    <div class="custom-toast select-none top-14 z-[9999]">
         <TransitionGroup name="slide-up">
             <ToastItem v-for="item in this.$toast.toastQueue" :key="item.id" :type="item.type" :msg="item.msg" />
         </TransitionGroup>

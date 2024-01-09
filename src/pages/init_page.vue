@@ -16,7 +16,8 @@
 import term_view from '../components/term_view/term_view.vue'
 import { termViewConfig } from '../components/term_view/term_view_config.js'
 import { Term } from '../utils/term.js'
-
+import { download } from '@tauri-apps/plugin-upload'
+import { toast } from '../components/toast/toast.js'
 export default {
     components: { term_view },
     data() {
@@ -24,6 +25,27 @@ export default {
             termViewConfig,
             term: new Term()
         }
+    },
+    methods: {
+        async init() {
+            // download bootstrap
+            const arch = AndroidApi.getOsArch()
+            if (arch == "unknown") {
+
+            } else {
+
+            }
+        }
+    },
+    async mounted() {
+        await this.init()
+        // download(
+        //     "http://mterm.hackerfy.cn/download/bootstrap-aarch64.zip",
+        //     "/data/data/com.mterm.mterm/bootstrap-aarch64.zip",
+        //     ({ progress, total }) => toast.success(`Downloaded ${progress} of ${total} bytes`),
+        // ).catch((err) => {
+        //     toast.error(err)
+        // })
     }
 }
 </script>

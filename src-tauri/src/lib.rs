@@ -4,6 +4,7 @@ mod command;
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_upload::init())
         .invoke_handler(tauri::generate_handler![
             command::create_mterm_default,
             command::create_mterm,
