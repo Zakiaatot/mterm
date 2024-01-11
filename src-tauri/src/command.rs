@@ -1,18 +1,29 @@
 #[tauri::command(rename_all = "snake_case")]
 pub fn create_mterm_default() -> i32 {
-    libmterm_rs::create_default()
+    libmterm_rs::create(
+        &"/system/bin/sh".to_string(),
+        &"/".to_string(),
+        &vec![],
+        &mut vec![
+            "HOME=/data/data/com.mterm.mterm/files/home".into(),
+            "TERMUX_PREFIX=/data/data/com.mterm.mterm/files/usr".into(),
+            "TERM=xterm-256color".into(),
+        ],
+        80,
+        25,
+    )
 }
 
 #[tauri::command(rename_all = "snake_case")]
-pub fn create_mterm(
-    cmd: String,
-    cwd: String,
-    argv: Vec<String>,
-    mut envp: Vec<String>,
-    rows: u16,
-    cols: u16,
-) -> i32 {
-    libmterm_rs::create(&cmd, &cwd, &argv, &mut envp, rows, cols)
+pub fn create_mterm() -> i32 {
+    libmterm_rs::create(
+        &"/bin/sh".to_string(),
+        &"/".to_string(),
+        &vec![],
+        &mut vec![],
+        80,
+        25,
+    )
 }
 
 #[tauri::command(rename_all = "snake_case")]
