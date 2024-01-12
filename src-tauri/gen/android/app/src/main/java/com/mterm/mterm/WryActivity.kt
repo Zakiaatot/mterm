@@ -18,6 +18,7 @@ import android.view.ViewTreeObserver
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
+import java.io.File
 
 abstract class WryActivity : AppCompatActivity() {
   var keep = true
@@ -71,6 +72,14 @@ abstract class WryActivity : AppCompatActivity() {
         arch.startsWith("x86") -> "i686"
         else -> "unknown"
       }
+    }
+    
+    @SuppressLint("SdCardPath")
+    @JavascriptInterface
+    fun isInit():Boolean{
+        val filePath = "/data/data/com.mterm.mterm/cache/lockfile"
+        val file = File(filePath)
+        return file.exists()
     }
   }
 

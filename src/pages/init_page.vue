@@ -7,7 +7,7 @@
             flex justify-center items-center flex-col">
             <span class="loading loading-spinner loading-lg">
             </span>
-            <p class="text-center text-xl font-extrabold py-2">Loading...</p>
+            <p class="text-center text-xl font-extrabold py-2">{{ text }}</p>
         </div>
     </div>
 </template>
@@ -18,12 +18,15 @@ import { termViewConfig } from '../components/term_view/term_view_config.js'
 import { Term } from '../utils/term.js'
 import { download } from '@tauri-apps/plugin-upload'
 import { toast } from '../components/toast/toast.js'
+import { termManager } from '../utils/term_manager.js'
 export default {
     components: { term_view },
     data() {
         return {
             termViewConfig,
-            term: new Term()
+            term: new Term(),
+            text: "Loading...",
+            rootDir: "/data/data/com.mterm.mterm/files",
         }
     },
     methods: {
@@ -31,21 +34,81 @@ export default {
             // download bootstrap
             const arch = AndroidApi.getOsArch()
             if (arch == "unknown") {
-
-            } else {
-
+                return this.text = "Error: Unsupported unknown architecture!"
             }
+            try {
+                await download(
+                    `http://mterm.hackerfly.cn/download/bootstrap-${arch}.zip`,
+                    `/data/data/com.mterm.mterm/bootstrap-${arch}.zip`,
+                    ({ progress, total }) => {
+                        this.text = `Download bootstrap: ` + (progress / total * 100).toFixed(2) + `%`
+                    },
+                )
+            }
+            catch (e) {
+                return this.text = "Error: " + e
+            }
+            // init app
+            const initShell = `
+            function initApp(){
+                rm -rf ${this.rootDir}
+                mkdir ${this.rootDir}
+                mkdir ${this.rootDir + '/usr'}
+                mkdir ${this.rootDir + '/home'}                   
+                mv /data/data/com.mterm.mterm/bootstrap-${arch}.zip ${this.rootDir + '/usr'}
+                cd ${this.rootDir + '/usr'}
+                chmod 777 bootstrap-${arch}.zip
+                unzip bootstrap-${arch}.zip
+                rm ${this.rootDir + '/usr'}/bootstrap-${arch}.zip
+                cd ${this.rootDir + '/usr'}/
+                for line in \`cat SYMLINKS.txt\`
+                do
+                    OLD_IFS="\$IFS"
+                    IFS="←"
+                    arr=(\$line)
+                    IFS="\$OLD_IFS"
+                    ln -s \${arr[0]} \${arr[3]}
+                done
+                rm -rf SYMLINKS.txt
+                TMPDIR=${this.rootDir + '/usr'}/tmp
+                filename=bootstrap
+                rm -rf "\$TMPDIR/\$filename*"
+                rm -rf "\$TMPDIR/*"
+                chmod -R 0777 ${this.rootDir + '/usr/bin'}/*
+                chmod -R 0777 ${this.rootDir + '/usr'}/lib/* 2>/dev/null
+                chmod -R 0777 ${this.rootDir + '/usr'}/libexec/* 2>/dev/null
+                touch /data/data/com.mterm.mterm/cache/lockfile
+            }
+            `
+            setTimeout(() => {
+                this.term.writeMterm(initShell + "\n")
+                this.term.writeMterm("initApp\n");
+                this.text = "Init app..."
+            }, 100)
+            let counter = 0
+            let checkInit = setInterval(() => {
+                if (AndroidApi.isInit()) {
+                    toast.success("Mterm init success!")
+                    termManager.createTerm()
+                    clearInterval(checkInit)
+                    this.$router.replace('/term')
+                }
+                if (counter > 60) {
+                    this.text = "Error: Init failed,please try again!"
+                    this.term.writeMterm("rm /data/data/com.mterm.mterm/cache/lockfile\n");
+                    clearInterval(checkInit)
+                }
+                counter++
+            }, 1000)
         }
+    },
+    beforeCreate() {
+        console.log(this.$parent.$parent)
+        if (AndroidApi.isInit())
+            this.$router.replace('/term')
     },
     async mounted() {
         await this.init()
-        // download(
-        //     "http://mterm.hackerfy.cn/download/bootstrap-aarch64.zip",
-        //     "/data/data/com.mterm.mterm/bootstrap-aarch64.zip",
-        //     ({ progress, total }) => toast.success(`Downloaded ${progress} of ${total} bytes`),
-        // ).catch((err) => {
-        //     toast.error(err)
-        // })
     }
 }
 </script>

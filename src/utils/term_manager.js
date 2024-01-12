@@ -8,14 +8,13 @@ class TermManager {
     termNow = null
 
     constructor() {
-        if (localStorage.getItem('initLock')) {
+        if (AndroidApi.isInit())
             this.createTerm()
-        }
     }
 
     createTerm() {
         if (this.termArray.length < MAX_TERM) {
-            this.termArray.push(new Term())
+            this.termArray.push(new Term(false))
             this.switchTerm(this.termArray.length - 1)
         }
         else
@@ -26,7 +25,7 @@ class TermManager {
         if (this.termArray.length == 1)
             return toast.error("Please leave at least one terminal!")
         const delNow = (this.termNow.uuid === this.termArray[index].uuid)
-        const msg = "Closed " + (this.termArray[index].alias === "" ? index : this.termArray[index].alias) + " ."
+        const msg = "Closed " + (this.termArray[index].alias === "" ? index : this.termArray[index].alias)
         this.termArray[index].destroyMterm()
         this.termArray.splice(index, 1)
         if (delNow) {

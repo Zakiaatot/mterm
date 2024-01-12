@@ -27,7 +27,7 @@
                 </div>
                 <div ref="drawer_body" class="drawer-body absolute w-full overflow-y-auto overflow-x-hidden -z-10">
                     <ul class="menu menu-md w-full rounded-box">
-                        <TransitionGroup name="fade">
+                        <TransitionGroup name="fade" v-if="itemShow">
                             <drawer_item v-for="(i, index) in termManager.termArray" :key="i.uuid" :term="i" :index="index"
                                 :active="routePath === '/term' && termManager.termNow.id === i.id" />
                             <button key="999" class="mt-6 btn btn-neutral text-3xl" @click="newTerm">+</button>
@@ -72,7 +72,8 @@ export default {
         return {
             termManager,
             scrolled: false,
-            routePath: null
+            routePath: null,
+            itemShow: true
         }
     },
     watch: {
@@ -80,6 +81,7 @@ export default {
             deep: true,
             handler(val) {
                 this.routePath = val
+                this.updateDrawer()
             }
         }
     },
@@ -104,6 +106,10 @@ export default {
             if (this.$route.path !== '/term')
                 this.$router.replace('/term')
             // this.closeDrawer()
+        },
+        updateDrawer() {
+            this.itemShow = false
+            this.$nextTick(() => { this.itemShow = true })
         }
     },
     mounted() {

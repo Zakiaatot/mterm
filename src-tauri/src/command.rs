@@ -17,10 +17,18 @@ pub fn create_mterm_default() -> i32 {
 #[tauri::command(rename_all = "snake_case")]
 pub fn create_mterm() -> i32 {
     libmterm_rs::create(
-        &"/bin/sh".to_string(),
-        &"/".to_string(),
-        &vec![],
-        &mut vec![],
+        &"/data/data/com.mterm.mterm/files/usr/bin/bash".to_string(),
+        &"/data/data/com.mterm.mterm/files/home".to_string(),
+        &vec!["-l".into()],
+        &mut vec![
+            "HOME=/data/data/com.mterm.mterm/files/home".into(),
+            "TERMUX_PREFIX=/data/data/com.mterm.mterm/files/usr".into(),
+            "TERM=xterm-256color".into(),
+            "PATH=/data/data/com.mterm.mterm/files/usr/bin".into(),
+            "LD_PRELOAD=/data/data/com.mterm.mterm/files/usr/lib/libtermux-exec.so".into(),
+            "SHELL=/data/data/com.mterm.mterm/files/usr/bin/bash".into(),
+            "TMPDIR=/data/data/com.mterm.mterm/files/usr/tmp".into(),
+        ],
         80,
         25,
     )

@@ -9,14 +9,16 @@ export class Term {
     alias = ""
     uuid = counter++
 
-    constructor(cmd, cwd, argv, envp) {
-        if (cmd === undefined || cmd === null) {
+    constructor(isDefault = true) {
+        if (isDefault) {
             this.createMtermDefault().then(() => {
                 this.setReadNonblockMterm()
             })
         }
         else {
-
+            this.createMterm().then(() => {
+                this.setReadNonblockMterm()
+            })
         }
     }
 
@@ -29,7 +31,7 @@ export class Term {
     }
 
     async createMterm() {
-        this.id
+        this.id = await invoke('create_mterm')
     }
 
     async destroyMterm() {
