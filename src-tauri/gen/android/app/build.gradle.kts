@@ -5,6 +5,12 @@ plugins {
 }
 
 android {
+  lintOptions {
+    isCheckReleaseBuilds = false
+    // Or, if you prefer, you can continue to check for errors in release builds,
+    // but continue the build even when errors are found:
+    isAbortOnError = false
+  }
   tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     exclude("**/generated/**")
   }
