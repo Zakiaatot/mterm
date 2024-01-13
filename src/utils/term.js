@@ -16,6 +16,10 @@ export class Term {
             })
         }
         else {
+            this.readMsg = 'Welcome to \x1B[1;3;31mMterm\x1B[0m!\n\r' +
+                'Powered by @\x1b[1;1;32mZakiaatot\x1b[0m!\n\r' +
+                'https://github.com/zakiaatot\n\r' +
+                '\u2764\ufe0f  \u2764\ufe0f  \u2764\ufe0f\n\r'
             this.createMterm().then(() => {
                 this.setReadNonblockMterm()
             })

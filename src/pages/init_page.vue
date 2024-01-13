@@ -63,6 +63,7 @@ export default {
                 cd ${this.rootDir + '/usr'}/
                 for line in \`cat SYMLINKS.txt\`
                 do
+                    echo $line
                     OLD_IFS="\$IFS"
                     IFS="←"
                     arr=(\$line)
@@ -102,13 +103,11 @@ export default {
             }, 1000)
         }
     },
-    beforeCreate() {
-        console.log(this.$parent.$parent)
+    async mounted() {
         if (AndroidApi.isInit())
             this.$router.replace('/term')
-    },
-    async mounted() {
-        await this.init()
+        else
+            await this.init()
     }
 }
 </script>
