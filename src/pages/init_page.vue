@@ -38,7 +38,7 @@ export default {
             }
             try {
                 await download(
-                    `http://mterm.hackerfly.cn/download/bootstrap-${arch}.zip`,
+                    `http://repo.mterm.hackerfly.cn/bootstraps/bootstrap-${arch}.zip`,
                     `/data/data/com.mterm.mterm/bootstrap-${arch}.zip`,
                     ({ progress, total }) => {
                         this.text = `Download bootstrap: ` + (progress / total * 100).toFixed(2) + `%`
