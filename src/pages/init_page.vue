@@ -78,10 +78,6 @@ export default {
                 chmod -R 0777 ${this.rootDir + '/usr/bin'}/*
                 chmod -R 0777 ${this.rootDir + '/usr'}/lib/* 2>/dev/null
                 chmod -R 0777 ${this.rootDir + '/usr'}/libexec/* 2>/dev/null
-                # fix dpkg
-                if $(dpkg --print-architecture) == arm64; then
-                    dpkg --add-architecture aarch64
-                fi
                 touch /data/data/com.mterm.mterm/cache/lockfile
             }
             `
