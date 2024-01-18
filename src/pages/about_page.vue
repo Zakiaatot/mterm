@@ -32,5 +32,6 @@ export default {
 
 :deep(.md) a {
     display: inline-block;
+    pointer-events: none;
 }
 </style>
