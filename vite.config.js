@@ -3,12 +3,13 @@ import vue from "@vitejs/plugin-vue";
 import { internalIpV4 } from "internal-ip";
 import tailwindcss from "tailwindcss"
 import autoprefixer from 'autoprefixer'
+import mdLoader from './vite_md_plugin.js'
 
 const mobile = !!/android|ios/.exec(process.env.TAURI_ENV_PLATFORM);
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
-  plugins: [vue()],
+  plugins: [mdLoader(), vue()],
   css: {
     postcss: {
       plugins: [
