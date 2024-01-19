@@ -30,7 +30,7 @@ Mterm 是一个基于 [Tauri 2.0 Beta](https://beta.tauri.app/) 构建的，支�
 
 ## 四、产品展示
 
-![screenshot](public/screenshot.jpg)
+![screenshot](screenshot.jpg)
 
 ## 五、产品下载
 
